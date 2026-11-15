@@ -8,6 +8,5 @@ backups
 reports
 logs
 proxy/certs
-docs
 scripts
 *.md
