@@ -12,4 +12,4 @@ COPY api/app.py api/healthcheck.py ./
 USER 10001
 EXPOSE 5000
 HEALTHCHECK --interval=10s --timeout=20s --start-period=5s --retries=3 CMD [ "python", "healthcheck.py" ]
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "workers=2", "app:app"]
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "2", "app:app"]
