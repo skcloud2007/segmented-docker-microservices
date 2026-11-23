@@ -9,6 +9,7 @@ WORKDIR /app
 COPY worker/requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 COPY worker/worker.py worker/healthcheck.py ./
+RUN mkdir /reports && chown 10001:10001 /reports
 USER 10001
-HEALTHCHECK --interval=10s --timeout=20s --start-period=5s --retries=3 CMD [ "python", "healthcheck.py" ]
+HEALTHCHECK --interval=10s --timeout=5s --start-period=15s --retries=3 CMD [ "python", "healthcheck.py" ]
 CMD ["python", "worker.py"]
