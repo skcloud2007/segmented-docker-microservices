@@ -3,7 +3,7 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."                       # always run from the repo root
 
-HUB_USER="skcloud2007"                        # your Docker Hub username
+HUB_USER="sk7528"                            # Docker Hub username
 TAG="$(git rev-parse --short HEAD)"           # images are tagged with the git SHA
 API_IMG="$HUB_USER/linkly-api:$TAG"
 WORKER_IMG="$HUB_USER/linkly-worker:$TAG"
