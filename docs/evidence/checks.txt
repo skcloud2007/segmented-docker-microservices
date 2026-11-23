@@ -1,0 +1,61 @@
+== Dual-homed: containers on each network
+dmz: proxy api 
+internal: worker api cache db 
+admin: db 
+
+== Published ports (only proxy should have host ports)
+proxy 0.0.0.0:80->8080/tcp, [::]:80->8080/tcp, 0.0.0.0:443->8443/tcp, [::]:443->8443/tcp
+worker 
+api 5000/tcp
+cache 6379/tcp
+db 5432/tcp
+
+== Process user (not root)
+USER                PID                 CMD
+10001               97448               /usr/local/bin/python3.12 /usr/local/bin/gunicorn --bind 0.0.0.0:5000 --workers 2 app:app
+10001               97472               /usr/local/bin/python3.12 /usr/local/bin/gunicorn --bind 0.0.0.0:5000 --workers 2 app:app
+10001               97473               /usr/local/bin/python3.12 /usr/local/bin/gunicorn --bind 0.0.0.0:5000 --workers 2 app:app
+USER                PID                 CMD
+10001               97564               python worker.py
+
+== Hardening
+/proxy CapDrop=[ALL] ReadonlyRootfs=true Memory=134217728 NanoCpus=500000000 SecurityOpt=[no-new-privileges]
+/api CapDrop=[ALL] ReadonlyRootfs=true Memory=268435456 NanoCpus=500000000 SecurityOpt=[no-new-privileges]
+/worker CapDrop=[ALL] ReadonlyRootfs=true Memory=268435456 NanoCpus=500000000 SecurityOpt=[no-new-privileges]
+/cache CapDrop=[ALL] ReadonlyRootfs=true Memory=268435456 NanoCpus=500000000 SecurityOpt=[no-new-privileges]
+/db CapDrop=[ALL] ReadonlyRootfs=true Memory=536870912 NanoCpus=1000000000 SecurityOpt=[no-new-privileges]
+
+== Secret exposure: env holds only the FILE path
+api: DB_PASSWORD_FILE=/run/secrets/db_password 
+worker: DB_PASSWORD_FILE=/run/secrets/db_password 
+db: POSTGRES_PASSWORD_FILE=/run/secrets/db_password 
+Times the real password appears in docker inspect: 0
+
+== api image size
+244792124
+0B
+0B
+0B
+0B
+16.4kB
+25.8MB
+12.3kB
+8.19kB
+28.7kB
+49.2kB
+0B
+0B
+16.4kB
+48.4MB
+0B
+0B
+0B
+9.67MB
+0B
+0B
+108MB
+
+== App works: create, follow, count
+created: QJAOXe
+follow: HTTP 302
+{"clicks":1,"code":"QJAOXe"}
