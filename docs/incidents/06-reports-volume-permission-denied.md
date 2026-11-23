@@ -41,10 +41,28 @@ RUN mkdir /reports && chown 10001:10001 /reports
 ~~~
 
 Rebuild, then recreate the volume so Docker copies the new ownership into it
-(the copy only happens for a new, empty volume):
+(the copy only happens for a new, empty volume).
 
+First attempt still failed: a typo created `/report` instead of `/reports`. Inspecting
+the image caught it:
 ~~~
-PASTE: ls -l /reports output after the fix
+$ docker run --rm --entrypoint ls linkly-worker:dev -ld /reports
+ls: cannot access '/reports': No such file or directory
+~~~
+
+After correcting the line:
+~~~
+$ docker run --rm --entrypoint ls linkly-worker:dev -ld /reports
+drwxr-xr-x 2 app app 4096 Nov 23 13:14 /reports
+
+$ docker volume rm reports && docker volume create reports
+$ docker run -d --name worker ... -v reports:/reports linkly-worker:dev
+
+$ docker run --rm -v reports:/reports busybox:1.36 ls -la /reports
+total 12
+drwxr-xr-x    2 10001    10001         4096 Nov 23 13:14 .
+drwxr-xr-x    1 root     root          4096 Nov 23 13:14 ..
+-rw-r--r--    1 10001    10001           23 Nov 23 13:14 clicks-2026-11-23.csv
 ~~~
 
 We did not fix it with `chmod 777` or by running as root: both would weaken the
