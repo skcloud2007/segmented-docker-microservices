@@ -1,0 +1,4 @@
+Backup written: backups/linkly-20261123-190805.sql.gz
+-rw-r--r--  1 skm  staff   928B 23 Nov 19:08 backups/linkly-20261123-190805.sql.gz
+1	H0M3SC	2026-11-22 17:14:41+00
+H0M3SC	https://example.com	2026-11-22 17:14:14.004118+00
