@@ -1,0 +1,24 @@
+FROM     TO                 EXPECTED  ACTUAL                           RESULT
+proxy    api:5000           Allowed   Allowed                          PASS
+proxy    db:5432            Blocked   Blocked (name did not resolve)   PASS
+proxy    cache:6379         Blocked   Blocked (name did not resolve)   PASS
+proxy    1.1.1.1:443        Allowed   Allowed                          PASS
+api      db:5432            Allowed   Allowed                          PASS
+api      cache:6379         Allowed   Allowed                          PASS
+api      1.1.1.1:443        Allowed   Allowed                          PASS
+worker   api:5000           Allowed   Allowed                          PASS
+worker   db:5432            Allowed   Allowed                          PASS
+worker   cache:6379         Allowed   Allowed                          PASS
+worker   1.1.1.1:443        Blocked   Blocked (timed out / no route)   PASS
+cache    api:5000           Allowed   Allowed                          PASS
+cache    db:5432            Allowed   Allowed                          PASS
+cache    1.1.1.1:443        Blocked   Blocked (timed out / no route)   PASS
+db       api:5000           Allowed   Allowed                          PASS
+db       cache:6379         Allowed   Allowed                          PASS
+db       1.1.1.1:443        Blocked   Blocked (timed out / no route)   PASS
+backup   api:5000           Blocked   Blocked (name did not resolve)   PASS
+backup   db:5432            Allowed   Allowed                          PASS
+backup   cache:6379         Blocked   Blocked (name did not resolve)   PASS
+backup   1.1.1.1:443        Blocked   Blocked (timed out / no route)   PASS
+
+All 21 checks match the design.
