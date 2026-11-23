@@ -1,0 +1,149 @@
+== Secret and certificate
+== Images (tag 4a9ae4b)
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 608B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.12-slim-bookworm
+#2 DONE 0.2s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [internal] load build context
+#4 transferring context: 4.57kB done
+#4 DONE 0.0s
+
+#5 [1/7] FROM docker.io/library/python:3.12-slim-bookworm@sha256:e697c81897302a4c4333bade000d98038fbb21eb064f8ee1fd42d02ebcd9d337
+#5 resolve docker.io/library/python:3.12-slim-bookworm@sha256:e697c81897302a4c4333bade000d98038fbb21eb064f8ee1fd42d02ebcd9d337 done
+#5 DONE 0.0s
+
+#6 [6/7] RUN pip install --no-cache-dir -r requirements.txt
+#6 CACHED
+
+#7 [4/7] WORKDIR /app
+#7 CACHED
+
+#8 [5/7] COPY api/requirements.txt .
+#8 CACHED
+
+#9 [2/7] RUN useradd --uid 10001 --no-create-home --shell /usr/sbin/nologin app
+#9 CACHED
+
+#10 [3/7] RUN apt-get update -y     && rm -rf /var/lib/apt/lists/*     && apt-get clean
+#10 CACHED
+
+#11 [7/7] COPY api/app.py api/healthcheck.py ./
+#11 CACHED
+
+#12 exporting to image
+#12 exporting layers done
+#12 exporting manifest sha256:2464725459eb1345441285dc93f510ac03279530c066d37a4187fbe772b0b41e done
+#12 exporting config sha256:b70e81075425e832ce821e748c4881b32d9a72e853c2c27ff5ece4a0fe05c706 done
+#12 exporting attestation manifest sha256:75ed1041dfc89dd08626fb81538111a6a324adeb247c6be71a393f9fd4834179 done
+#12 exporting manifest list sha256:e3c3d10093a981352ffec6a9f9ea8b8b83d8ae478d13785aaff000310e3aaaa2 done
+#12 naming to docker.io/skcloud2007/linkly-api:4a9ae4b done
+#12 unpacking to docker.io/skcloud2007/linkly-api:4a9ae4b done
+#12 DONE 0.0s
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/y5e6yukwy7r8xpjikizkfwmig
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 613B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.12-slim-bookworm
+#2 DONE 0.0s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [1/8] FROM docker.io/library/python:3.12-slim-bookworm@sha256:e697c81897302a4c4333bade000d98038fbb21eb064f8ee1fd42d02ebcd9d337
+#4 resolve docker.io/library/python:3.12-slim-bookworm@sha256:e697c81897302a4c4333bade000d98038fbb21eb064f8ee1fd42d02ebcd9d337 done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 3.19kB done
+#5 DONE 0.0s
+
+#6 [2/8] RUN useradd --uid 10001 --no-create-home --shell /usr/sbin/nologin app
+#6 CACHED
+
+#7 [7/8] COPY worker/worker.py worker/healthcheck.py ./
+#7 CACHED
+
+#8 [6/8] RUN pip install --no-cache-dir -r requirements.txt
+#8 CACHED
+
+#9 [4/8] WORKDIR /app
+#9 CACHED
+
+#10 [5/8] COPY worker/requirements.txt .
+#10 CACHED
+
+#11 [3/8] RUN apt-get update -y     && rm -rf /var/lib/apt/lists/*     && apt-get clean
+#11 CACHED
+
+#12 [8/8] RUN mkdir /reports && chown 10001:10001 /reports
+#12 CACHED
+
+#13 exporting to image
+#13 exporting layers done
+#13 exporting manifest sha256:0d724b8b420602759c25452e5e185efe55d41a8239a71576d559e9de87c525d7 done
+#13 exporting config sha256:eaa6acc5ef94253203064c7a2d1f1807554da3d0ce8c2a5d872b1a6d76465f4f done
+#13 exporting attestation manifest sha256:b0fc37740124529ab3d835ed7bbc375929c016d8375fcd35cbeb0ede5fd37e12 done
+#13 exporting manifest list sha256:9ec2f723edcbb7840f4644e824e25efd8e54f9d64f4d39b4a4bb52785f37117c done
+#13 naming to docker.io/skcloud2007/linkly-worker:4a9ae4b done
+#13 unpacking to docker.io/skcloud2007/linkly-worker:4a9ae4b done
+#13 DONE 0.0s
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/rakrmiipdqjd0bg8vaantfhd5
+== Networks and volumes
+c72f103e2df251ce0ebe6838354837a5d07f2b4be99e34d2f8b9a08239c9fbae
+236ea464adf7ed3a47d62b4b799aa2c72c93287cf9e515fd089f6e09c69bb54f
+4ba5d9cd69cf25333bc24fe5c12b077ce50df1780c0729d39aaa12ff833317be
+== Removing old containers (data stays in volumes)
+== db
+7f9497ab61155effa3ac11a2d782b240c5828dbab8b2e504cfda800094e60456
+waiting for db...
+waiting for db...
+waiting for db...
+db is healthy
+== cache
+f2e6301b772682111103d220203f7529614e41d9edd878c69d71f60f1a70f664
+waiting for cache...
+waiting for cache...
+waiting for cache...
+cache is healthy
+== api
+728a86c3610cf80a1713a74e5089490b5b613bb13fe51b44d0ff8f1b7a3047c7
+waiting for api...
+waiting for api...
+waiting for api...
+api is healthy
+== worker
+412b1cb92d18315ba17aa738ae7fc8e6e23c46c0bcd70b6971659313bd4d4581
+waiting for worker...
+waiting for worker...
+waiting for worker...
+worker is healthy
+== proxy
+165a1eb8171cc004addaf90c037331a5fc5df0d7bc20461c34a68caa2e5835a8
+waiting for proxy...
+waiting for proxy...
+waiting for proxy...
+waiting for proxy...
+waiting for proxy...
+proxy is healthy
+== Stack is up
+NAMES     STATUS                    PORTS
+proxy     Up 10 seconds (healthy)   0.0.0.0:80->8080/tcp, [::]:80->8080/tcp, 0.0.0.0:443->8443/tcp, [::]:443->8443/tcp
+worker    Up 16 seconds (healthy)   
+api       Up 23 seconds (healthy)   5000/tcp
+cache     Up 29 seconds (healthy)   6379/tcp
+db        Up 35 seconds (healthy)   5432/tcp
